@@ -1,3 +1,5 @@
+import { selectShipments } from '@/ShipmentsTable/shipments-reducer'
+import { useAppSelector } from '@/store'
 import Paper from '@mui/material/Paper'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
@@ -5,6 +7,8 @@ import TableCell from '@mui/material/TableCell'
 import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
+
+import s from './table.module.scss'
 
 function createData(name: string, calories: number, fat: number, carbs: number, protein: number) {
   return { calories, carbs, fat, name, protein }
@@ -19,29 +23,30 @@ const rows = [
 ]
 
 export const BasicTable = () => {
+  const shipments = useAppSelector(selectShipments)
+
   return (
     <TableContainer component={Paper}>
       <Table aria-label={'simple table'} sx={{ minWidth: 650 }}>
         <TableHead>
-          <TableRow>
-            <TableCell>ORDERNO</TableCell>
-            <TableCell align={'right'}>DELIVERYDATE</TableCell>
-            <TableCell align={'right'}>CUSTOMER</TableCell>
-            <TableCell align={'right'}>TRANCKINGNO</TableCell>
-            <TableCell align={'right'}>STATUS</TableCell>
-            <TableCell align={'right'}>CONSIGNEE</TableCell>
+          <TableRow className={s.mainRow}>
+            <TableCell align={'left'}>ORDERNO</TableCell>
+            <TableCell align={'left'}>DELIVERYDATE</TableCell>
+            <TableCell align={'left'}>CUSTOMER</TableCell>
+            <TableCell align={'left'}>TRANCKINGNO</TableCell>
+            <TableCell align={'left'}>STATUS</TableCell>
+            <TableCell align={'left'}>CONSIGNEE</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map(row => (
-            <TableRow key={row.name} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-              <TableCell component={'th'} scope={'row'}>
-                {row.name}
-              </TableCell>
-              <TableCell align={'right'}>{row.calories}</TableCell>
-              <TableCell align={'right'}>{row.fat}</TableCell>
-              <TableCell align={'right'}>{row.carbs}</TableCell>
-              <TableCell align={'right'}>{row.protein}</TableCell>
+          {shipments.shipments.map(arr => (
+            <TableRow key={arr.orderNo} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+              <TableCell align={'left'}>{arr.orderNo}</TableCell>
+              <TableCell align={'left'}>{arr.date}</TableCell>
+              <TableCell align={'left'}>{arr.customer}</TableCell>
+              <TableCell align={'left'}>{arr.trackingNo}</TableCell>
+              <TableCell align={'left'}>{arr.status}</TableCell>
+              <TableCell align={'left'}>{arr.consignee}</TableCell>
             </TableRow>
           ))}
         </TableBody>

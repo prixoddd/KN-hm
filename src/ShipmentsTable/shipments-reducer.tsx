@@ -27,16 +27,7 @@ interface ShipmentsState {
 
 // Define the initial state using that type
 const initialState: ShipmentsState = {
-  shipments: [
-    {
-      consignee: 'Nikita psina',
-      customer: 'Nuveen Diversified Dividend and Income Fund',
-      date: '4/6/2019',
-      orderNo: 'of-397185-03612067-7955475',
-      status: "'Delivered'",
-      trackingNo: 'TP-596673-16019232-9631414',
-    },
-  ],
+  shipments: [],
   value: 0,
 }
 
@@ -64,7 +55,7 @@ export const shipmentsSlice = createSlice({
 export const { decrement, increment, incrementByAmount, setShipments } = shipmentsSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
-export const selectCount = (state: AppRootStateType) => state.shipments.value
+export const selectShipments = (state: AppRootStateType) => state.shipments
 export default shipmentsSlice.reducer
 
 export type RootObject = RootObjectChild[]
