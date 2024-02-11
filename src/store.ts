@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 
-import shipmentsReducer from '@/ShipmentsTable/shipments-reducer'
+import shipmentsReducer from '@/components/ShipmentsTable/shipments-reducer'
 import { configureStore } from '@reduxjs/toolkit'
 
 export const store = configureStore({
