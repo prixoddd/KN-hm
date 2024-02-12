@@ -22,9 +22,14 @@ export const BasicModal = (props: PropsType) => {
       open={props.open}
     >
       <Box className={s.modal}>
-        <Typography component={'h2'} id={'modal-modal-title'} variant={'h6'}>
-          SHIPMENT DETAILS
-        </Typography>
+        <div className={s.title}>
+          <Typography component={'h2'} id={'modal-modal-title'} variant={'h6'}>
+            SHIPMENT DETAILS
+          </Typography>
+          <Typography sx={{ marginLeft: '50px' }} variant={'subtitle1'}>
+            You can edit every text field
+          </Typography>
+        </div>
         <div className={s.mainDiv}>
           {Object.keys(editArr).map((key, index) => (
             <EditableTextField
