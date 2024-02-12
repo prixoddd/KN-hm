@@ -1,0 +1,40 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: calc(100vw - 16px);
+  height: calc(100vh - 16px);
+
+  //background-color: black;
+}
+
+.greetings {
+  min-width: 440px;
+  min-height: 320px;
+  background-color: white;
+}
+
+.text {
+  color: #444;
+  text-align: center;
+}
+
+.icons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.switchAndText {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}

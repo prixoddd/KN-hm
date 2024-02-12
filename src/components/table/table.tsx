@@ -3,6 +3,7 @@ import * as React from 'react'
 import { deleteShipment, selectShipments, setArrForEdit } from '@/common/shipments-reducer'
 import { RootObjectChild } from '@/common/types'
 import { BasicModal } from '@/components/modal/modal'
+import { IntegrationNotistack } from '@/components/snackbar/snackbar'
 import SortButton from '@/components/sortButton/sortButton'
 import { useAppDispatch, useAppSelector } from '@/store'
 import {
@@ -23,7 +24,7 @@ export const BasicTable = () => {
   const [open, setOpen] = React.useState(false)
 
   const shipments = useAppSelector(selectShipments)
-
+  const alert = useAppSelector(state => state.shipments.alert)
   const onClickHandler = (arr: RootObjectChild, a: boolean) => {
     setOpen(a)
     dispatch(setArrForEdit(arr))
@@ -31,6 +32,7 @@ export const BasicTable = () => {
 
   return (
     <>
+      <IntegrationNotistack alert={alert} />
       <BasicModal onClose={() => setOpen(false)} open={open} />
       <TableContainer component={Paper}>
         <Table aria-label={'simple table'} sx={{ minWidth: 650 }}>

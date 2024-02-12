@@ -1,28 +1,37 @@
-import { useCallback, useEffect } from 'react'
+import { useState } from 'react'
 
-import { useAppSelector } from '@/store'
+import { alert } from '@/common/types'
 import { SnackbarProvider, useSnackbar } from 'notistack'
 
-function MyApp() {
-  const alertMessage = useAppSelector(state => state.shipments.alert.text.message)
-  const alertVariant = useAppSelector(state => state.shipments.alert.severity)
+type Props = {
+  alert: alert
+}
+function MyApp({ alert }: Props) {
+  // const alertVariant = useAppSelector(state => state.shipments.alert.severity)
   const { enqueueSnackbar } = useSnackbar()
+  const [lastAllert, setLastAllert] = useState({ severity: 'info', text: { message: '' } })
 
-  const handleClickVariant = useCallback(() => {
-    alertMessage !== '' && enqueueSnackbar(alertMessage, { variant: alertVariant })
-  }, [enqueueSnackbar, alertMessage, alertVariant])
+  // const handleClickVariant = useCallback(() => {
+  //   alertMessage !== '' && enqueueSnackbar(alertMessage, { variant: alertVariant })
+  // }, [alertMessage])
 
-  useEffect(() => {
-    handleClickVariant()
-  }, [alertMessage, alertVariant])
+  // useEffect(() => {
+  //   // debugger
+  //   // handleClickVariant()
+  //
+  // }, [alert])
+  debugger
 
-  return <>{/*<Button onClick={handleClickVariant}>Show success snackbar</Button>*/}</>
+  alert.text.message !== '' && enqueueSnackbar(alert.text.message, { variant: alert.severity })
+  setLastAllert(alert)
+
+  return <></>
 }
 
-export default function IntegrationNotistack() {
+export const IntegrationNotistack = ({ alert }: Props) => {
   return (
     <SnackbarProvider maxSnack={3}>
-      <MyApp />
+      <MyApp alert={alert} />
     </SnackbarProvider>
   )
 }

@@ -3,11 +3,9 @@ import { RootObject } from '@/common/types'
 import { Dispatch } from '@reduxjs/toolkit'
 import axios from 'axios'
 
-const API_URL = 'https://my.api.mockaroo.com/shipments.json?key=5e0b62d0'
-
 export const shipmentsApi = {
-  getShipments() {
-    return axios.get<RootObject>(API_URL)
+  getShipments(apiUrl: string) {
+    return axios.get<RootObject>(apiUrl)
   },
 }
 
@@ -21,25 +19,28 @@ export const getObjectAfterDelay = (): Promise<any> => {
   })
 }
 
-export const fetchData = () => (dispatch: Dispatch) => {
+export const fetchData = (apiUrl: string) => (dispatch: Dispatch) => {
   dispatch(setLoader(true))
   shipmentsApi
-    .getShipments()
+    .getShipments(apiUrl)
     .then(result => {
       if (result) {
         dispatch(setLoader(false))
         dispatch(setShipments(result.data))
-        dispatch(
-          setAlert({
-            severity: 'success',
-            text: { message: 'Data successfully fetched' },
-          })
-        )
+        // debugger
+        // dispatch(
+        //   setAlert({
+        //     severity: 'success',
+        //     text: { message: 'Data successfully fetched' },
+        //   })
+        // )
+        // alert('success')
 
         return result
       }
     })
     .catch(e => {
+      debugger
       dispatch(setAlert({ severity: 'error', text: e as { message: string } }))
       dispatch(setLoader(true))
 
@@ -48,6 +49,7 @@ export const fetchData = () => (dispatch: Dispatch) => {
     .then(result => {
       if (result.status !== 200) {
         setTimeout(async () => {
+          debugger
           dispatch(
             setAlert({
               severity: 'info',
@@ -60,12 +62,12 @@ export const fetchData = () => (dispatch: Dispatch) => {
             if (result) {
               dispatch(setLoader(false))
               dispatch(setShipments(result))
-              dispatch(
-                setAlert({
-                  severity: 'success',
-                  text: { message: 'Data successfully fetched' },
-                })
-              )
+              // dispatch(
+              //   setAlert({
+              //     severity: 'success',
+              //     text: { message: 'Data successfully fetched' },
+              //   })
+              // )
             }
           })
           .catch(error => {

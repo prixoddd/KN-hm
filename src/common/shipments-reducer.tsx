@@ -58,6 +58,9 @@ export const shipmentsSlice = createSlice({
 
       state.shipments[findArrayIndex] = action.payload.modifyArray
     },
+    resetShipments: state => {
+      state.shipments = []
+    },
     setAlert: (state, action: PayloadAction<alert>) => {
       state.alert = { ...action.payload }
     },
@@ -157,6 +160,7 @@ export const shipmentsSlice = createSlice({
 export const {
   deleteShipment,
   editShipments,
+  resetShipments,
   setAlert,
   setArrForEdit,
   setLoader,
