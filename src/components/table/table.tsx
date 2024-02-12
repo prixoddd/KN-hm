@@ -1,15 +1,15 @@
 import * as React from 'react'
 
-import { BasicModal } from '@/components/Modal/Modal'
 import {
-  RootObjectChild,
-  SortDirectionT,
   deleteShipment,
   selectShipments,
+  selectSortDirection,
+  selectorSortBy,
   setArrForEdit,
   sortShipments,
-  sortType,
-} from '@/components/ShipmentsTable/shipments-reducer'
+} from '@/common/shipments-reducer'
+import { RootObjectChild, SortDirectionT, sortType } from '@/common/types'
+import { BasicModal } from '@/components/modal/modal'
 import { useAppDispatch, useAppSelector } from '@/store'
 import { Button } from '@mui/material'
 import Paper from '@mui/material/Paper'
@@ -27,7 +27,8 @@ export const BasicTable = () => {
   const [open, setOpen] = React.useState(false)
 
   const shipments = useAppSelector(selectShipments)
-  const sortDirection = useAppSelector(state => state.shipments.sortDirection)
+  const sortDirection = useAppSelector(selectSortDirection)
+  const sortBy = useAppSelector(selectorSortBy)
 
   const onClickHandler = (arr: RootObjectChild, a: boolean) => {
     setOpen(a)
@@ -73,31 +74,61 @@ export const BasicTable = () => {
               <TableCell align={'left'}>
                 DELIVERYDATE{' '}
                 <button onClick={() => filterHandler('date')}>
-                  {renderSortDirection(sortDirection.date)}
+                  {sortBy !== 'date' ? (
+                    <>
+                      <span className={s.arrowRed}>↑</span> <span className={s.arrowGreen}>↓</span>
+                    </>
+                  ) : (
+                    renderSortDirection(sortDirection.date)
+                  )}
                 </button>
               </TableCell>
               <TableCell align={'left'}>
                 CUSTOMER{' '}
                 <button onClick={() => filterHandler('customer')}>
-                  {renderSortDirection(sortDirection.customer)}
+                  {sortBy !== 'customer' ? (
+                    <>
+                      <span className={s.arrowRed}>↑</span> <span className={s.arrowGreen}>↓</span>
+                    </>
+                  ) : (
+                    renderSortDirection(sortDirection.customer)
+                  )}
                 </button>
               </TableCell>
               <TableCell align={'left'}>
                 TRANCKINGNO{' '}
                 <button onClick={() => filterHandler('trackingNo')}>
-                  {renderSortDirection(sortDirection.trackingNo)}
+                  {sortBy !== 'trackingNo' ? (
+                    <>
+                      <span className={s.arrowRed}>↑</span> <span className={s.arrowGreen}>↓</span>
+                    </>
+                  ) : (
+                    renderSortDirection(sortDirection.trackingNo)
+                  )}
                 </button>
               </TableCell>
               <TableCell align={'left'}>
                 STATUS{' '}
                 <button onClick={() => filterHandler('status')}>
-                  {renderSortDirection(sortDirection.status)}
+                  {sortBy !== 'status' ? (
+                    <>
+                      <span className={s.arrowRed}>↑</span> <span className={s.arrowGreen}>↓</span>
+                    </>
+                  ) : (
+                    renderSortDirection(sortDirection.status)
+                  )}
                 </button>
               </TableCell>
               <TableCell align={'left'}>
                 CONSIGNEE{' '}
                 <button onClick={() => filterHandler('consignee')}>
-                  {renderSortDirection(sortDirection.consignee)}
+                  {sortBy !== 'consignee' ? (
+                    <>
+                      <span className={s.arrowRed}>↑</span> <span className={s.arrowGreen}>↓</span>
+                    </>
+                  ) : (
+                    renderSortDirection(sortDirection.consignee)
+                  )}
                 </button>
               </TableCell>
               <TableCell align={'left'}></TableCell>
@@ -105,12 +136,9 @@ export const BasicTable = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {shipments.shipments.map(arr => (
+            {shipments.shipments.map((arr, key) => (
               <>
-                <TableRow
-                  key={arr.orderNo}
-                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                >
+                <TableRow key={key} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                   <TableCell align={'left'}>{arr.orderNo}</TableCell>
                   <TableCell align={'left'}>{arr.date}</TableCell>
                   <TableCell align={'left'}>{arr.customer}</TableCell>

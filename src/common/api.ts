@@ -1,4 +1,6 @@
-import { RootObject } from '@/components/ShipmentsTable/shipments-reducer'
+import { setAlert, setLoader, setShipments } from '@/common/shipments-reducer'
+import { RootObject } from '@/common/types'
+import { Dispatch } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 const API_URL = 'https://my.api.mockaroo.com/shipments.json?key=5e0b62d0'
@@ -17,6 +19,61 @@ export const getObjectAfterDelay = (): Promise<any> => {
       resolve(data)
     }, 5000)
   })
+}
+
+export const fetchData = () => (dispatch: Dispatch) => {
+  dispatch(setLoader(true))
+  shipmentsApi
+    .getShipments()
+    .then(result => {
+      if (result) {
+        dispatch(setLoader(false))
+        dispatch(setShipments(result.data))
+        dispatch(
+          setAlert({
+            severity: 'success',
+            text: { message: 'Data successfully fetched' },
+          })
+        )
+
+        return result
+      }
+    })
+    .catch(e => {
+      dispatch(setAlert({ severity: 'error', text: e as { message: string } }))
+      dispatch(setLoader(true))
+
+      return e
+    })
+    .then(result => {
+      if (result.status !== 200) {
+        setTimeout(async () => {
+          dispatch(
+            setAlert({
+              severity: 'info',
+              text: { message: 'Fetching data from a backup resource' },
+            })
+          )
+        }, 1000)
+        getObjectAfterDelay()
+          .then(result => {
+            if (result) {
+              dispatch(setLoader(false))
+              dispatch(setShipments(result))
+              dispatch(
+                setAlert({
+                  severity: 'success',
+                  text: { message: 'Data successfully fetched' },
+                })
+              )
+            }
+          })
+          .catch(error => {
+            // handle error from backup resource fetch
+            console.error('Error fetching data from backup resource:', error)
+          })
+      }
+    })
 }
 
 const dataFromServer = [

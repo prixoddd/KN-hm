@@ -1,17 +1,17 @@
 import { useEffect } from 'react'
 
-import { fetchData, selectLoader } from '@/components/ShipmentsTable/shipments-reducer'
-import { BasicTable } from '@/components/ShipmentsTable/table'
+import { fetchData } from '@/common/api'
+import { selectLoader } from '@/common/shipments-reducer'
 import IntegrationNotistack from '@/components/snackbar/snackbar'
+import { BasicTable } from '@/components/table/table'
 import { useAppDispatch, useAppSelector } from '@/store'
 import { LinearProgress } from '@mui/material'
 
-import s from '@/components/ShipmentsTable/table.module.scss'
+import s from '@/components/table/table.module.scss'
 
 export function App() {
   const dispatch = useAppDispatch()
   const loader = useAppSelector(selectLoader)
-  // const shipments = useAppSelector(state => state.shipments)
 
   useEffect(() => {
     dispatch(fetchData())
@@ -22,7 +22,6 @@ export function App() {
       <IntegrationNotistack />
       <BasicTable />
       {loader && <LinearProgress />}
-      {/*{alert.text.message !== '' && <Alert severity={alert.severity}>{alert.text.message}</Alert>}*/}
     </div>
   )
 }
