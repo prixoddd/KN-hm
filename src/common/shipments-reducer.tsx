@@ -1,5 +1,5 @@
 import { RootObjectChild, SortDirectionT, alert, sortType } from '@/common/types'
-import { ForEdit } from '@/components/EditableSpan/EditableTextField'
+import { ForEdit } from '@/components/editableSpan/editableTextField'
 import { AppRootStateType } from '@/store'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 

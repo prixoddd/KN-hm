@@ -6,7 +6,7 @@ import { useAppDispatch } from '@/store'
 import { Typography } from '@mui/material'
 import TextField from '@mui/material/TextField'
 
-import s from './EditableTextField.module.scss'
+import s from './editableTextField.module.scss'
 
 type EditableSpanPropsType = {
   array: RootObjectChild

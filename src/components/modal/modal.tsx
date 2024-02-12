@@ -1,6 +1,6 @@
 import { selectArrFoeEdit } from '@/common/shipments-reducer'
 import { sortType } from '@/common/types'
-import { EditableTextField } from '@/components/EditableSpan/EditableTextField'
+import { EditableTextField } from '@/components/editableSpan/editableTextField'
 import { useAppSelector } from '@/store'
 import { Box, Modal, Typography } from '@mui/material'
 

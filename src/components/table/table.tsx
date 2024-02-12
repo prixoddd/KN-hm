@@ -1,24 +1,20 @@
 import * as React from 'react'
 
-import {
-  deleteShipment,
-  selectShipments,
-  selectSortDirection,
-  selectorSortBy,
-  setArrForEdit,
-  sortShipments,
-} from '@/common/shipments-reducer'
-import { RootObjectChild, SortDirectionT, sortType } from '@/common/types'
+import { deleteShipment, selectShipments, setArrForEdit } from '@/common/shipments-reducer'
+import { RootObjectChild } from '@/common/types'
 import { BasicModal } from '@/components/modal/modal'
+import SortButton from '@/components/sortButton/sortButton'
 import { useAppDispatch, useAppSelector } from '@/store'
-import { Button } from '@mui/material'
-import Paper from '@mui/material/Paper'
-import Table from '@mui/material/Table'
-import TableBody from '@mui/material/TableBody'
-import TableCell from '@mui/material/TableCell'
-import TableContainer from '@mui/material/TableContainer'
-import TableHead from '@mui/material/TableHead'
-import TableRow from '@mui/material/TableRow'
+import {
+  Button,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from '@mui/material'
 
 import s from './table.module.scss'
 
@@ -27,39 +23,10 @@ export const BasicTable = () => {
   const [open, setOpen] = React.useState(false)
 
   const shipments = useAppSelector(selectShipments)
-  const sortDirection = useAppSelector(selectSortDirection)
-  const sortBy = useAppSelector(selectorSortBy)
 
   const onClickHandler = (arr: RootObjectChild, a: boolean) => {
     setOpen(a)
     dispatch(setArrForEdit(arr))
-  }
-
-  const filterHandler = (sortBy: sortType) => {
-    dispatch(sortShipments(sortBy))
-  }
-
-  const renderSortDirection = (direction: SortDirectionT) => {
-    switch (direction) {
-      case 'down':
-        return (
-          <>
-            <span className={s.arrowRed}>↓</span> <span className={s.arrowRed}>↓</span>
-          </>
-        )
-      case 'up':
-        return (
-          <>
-            <span className={s.arrowGreen}>↑</span> <span className={s.arrowGreen}>↑</span>
-          </>
-        )
-      default:
-        return (
-          <>
-            <span className={s.arrowRed}>↑</span> <span className={s.arrowGreen}>↓</span>
-          </>
-        )
-    }
   }
 
   return (
@@ -72,64 +39,19 @@ export const BasicTable = () => {
               <TableCell align={'left'}>ORDERNO</TableCell>
 
               <TableCell align={'left'}>
-                DELIVERYDATE{' '}
-                <button onClick={() => filterHandler('date')}>
-                  {sortBy !== 'date' ? (
-                    <>
-                      <span className={s.arrowRed}>↑</span> <span className={s.arrowGreen}>↓</span>
-                    </>
-                  ) : (
-                    renderSortDirection(sortDirection.date)
-                  )}
-                </button>
+                DELIVERYDATE <SortButton title={'date'} />
               </TableCell>
               <TableCell align={'left'}>
-                CUSTOMER{' '}
-                <button onClick={() => filterHandler('customer')}>
-                  {sortBy !== 'customer' ? (
-                    <>
-                      <span className={s.arrowRed}>↑</span> <span className={s.arrowGreen}>↓</span>
-                    </>
-                  ) : (
-                    renderSortDirection(sortDirection.customer)
-                  )}
-                </button>
+                CUSTOMER <SortButton title={'customer'} />
               </TableCell>
               <TableCell align={'left'}>
-                TRANCKINGNO{' '}
-                <button onClick={() => filterHandler('trackingNo')}>
-                  {sortBy !== 'trackingNo' ? (
-                    <>
-                      <span className={s.arrowRed}>↑</span> <span className={s.arrowGreen}>↓</span>
-                    </>
-                  ) : (
-                    renderSortDirection(sortDirection.trackingNo)
-                  )}
-                </button>
+                TRANCKINGNO <SortButton title={'trackingNo'} />
               </TableCell>
               <TableCell align={'left'}>
-                STATUS{' '}
-                <button onClick={() => filterHandler('status')}>
-                  {sortBy !== 'status' ? (
-                    <>
-                      <span className={s.arrowRed}>↑</span> <span className={s.arrowGreen}>↓</span>
-                    </>
-                  ) : (
-                    renderSortDirection(sortDirection.status)
-                  )}
-                </button>
+                STATUS <SortButton title={'status'} />
               </TableCell>
               <TableCell align={'left'}>
-                CONSIGNEE{' '}
-                <button onClick={() => filterHandler('consignee')}>
-                  {sortBy !== 'consignee' ? (
-                    <>
-                      <span className={s.arrowRed}>↑</span> <span className={s.arrowGreen}>↓</span>
-                    </>
-                  ) : (
-                    renderSortDirection(sortDirection.consignee)
-                  )}
-                </button>
+                CONSIGNEE <SortButton title={'consignee'} />
               </TableCell>
               <TableCell align={'left'}></TableCell>
               <TableCell align={'left'}></TableCell>
