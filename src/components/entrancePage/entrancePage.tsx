@@ -59,5 +59,3 @@ export const EntrancePage = () => {
     </div>
   )
 }
-
-export default EntrancePage

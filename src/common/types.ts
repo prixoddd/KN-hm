@@ -12,4 +12,4 @@ export type RootObjectChild = {
 }
 
 export type sortType = 'consignee' | 'customer' | 'date' | 'orderNo' | 'status' | 'trackingNo'
-type AlertType = 'error' | 'info' | 'success' | 'warning'
+export type AlertType = 'error' | 'info' | 'success' | 'warning'

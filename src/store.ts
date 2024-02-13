@@ -1,11 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux'
 
-import shipmentsReducer from '@/common/shipments-reducer'
+import { appSlice } from '@/common/app-reducer'
+import { shipmentsSlice } from '@/common/shipments-reducer'
 import { configureStore } from '@reduxjs/toolkit'
 
 export const store = configureStore({
   reducer: {
-    shipments: shipmentsReducer,
+    app: appSlice.reducer,
+    shipments: shipmentsSlice.reducer,
   },
 })
 

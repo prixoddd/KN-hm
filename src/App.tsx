@@ -1,7 +1,8 @@
 import { useEffect } from 'react'
 
 import { fetchData } from '@/common/api'
-import { resetShipments, selectLoader, setAlert } from '@/common/shipments-reducer'
+import { resetShipments, selectLoader } from '@/common/shipments-reducer'
+import { IntegrationNotistack } from '@/components/snackbar/snackbar'
 import { BasicTable } from '@/components/table/table'
 import { useAppDispatch, useAppSelector } from '@/store'
 import { LinearProgress } from '@mui/material'
@@ -12,6 +13,7 @@ type Props = { url: string }
 
 export function App({ url }: Props) {
   const dispatch = useAppDispatch()
+
   const loader = useAppSelector(selectLoader)
 
   useEffect(() => {
@@ -22,6 +24,8 @@ export function App({ url }: Props) {
 
   return (
     <div className={s.app}>
+      <IntegrationNotistack />
+      {/*<ErrorSnackbar />*/}
       <BasicTable />
       {loader && <LinearProgress />}
     </div>

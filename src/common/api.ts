@@ -1,4 +1,5 @@
-import { setAlert, setLoader, setShipments } from '@/common/shipments-reducer'
+import { setAlert } from '@/common/app-reducer'
+import { setLoader, setShipments } from '@/common/shipments-reducer'
 import { RootObject } from '@/common/types'
 import { Dispatch } from '@reduxjs/toolkit'
 import axios from 'axios'
@@ -27,20 +28,18 @@ export const fetchData = (apiUrl: string) => (dispatch: Dispatch) => {
       if (result) {
         dispatch(setLoader(false))
         dispatch(setShipments(result.data))
-        // debugger
-        // dispatch(
-        //   setAlert({
-        //     severity: 'success',
-        //     text: { message: 'Data successfully fetched' },
-        //   })
-        // )
-        // alert('success')
+
+        dispatch(
+          setAlert({
+            severity: 'success',
+            text: { message: 'Data successfully fetched' },
+          })
+        )
 
         return result
       }
     })
     .catch(e => {
-      debugger
       dispatch(setAlert({ severity: 'error', text: e as { message: string } }))
       dispatch(setLoader(true))
 
@@ -49,7 +48,6 @@ export const fetchData = (apiUrl: string) => (dispatch: Dispatch) => {
     .then(result => {
       if (result.status !== 200) {
         setTimeout(async () => {
-          debugger
           dispatch(
             setAlert({
               severity: 'info',
@@ -62,12 +60,12 @@ export const fetchData = (apiUrl: string) => (dispatch: Dispatch) => {
             if (result) {
               dispatch(setLoader(false))
               dispatch(setShipments(result))
-              // dispatch(
-              //   setAlert({
-              //     severity: 'success',
-              //     text: { message: 'Data successfully fetched' },
-              //   })
-              // )
+              dispatch(
+                setAlert({
+                  severity: 'success',
+                  text: { message: 'Data successfully fetched' },
+                })
+              )
             }
           })
           .catch(error => {

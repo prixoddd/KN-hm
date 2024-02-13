@@ -1,37 +1,39 @@
-import { useState } from 'react'
+import { useEffect } from 'react'
 
-import { alert } from '@/common/types'
+import { resetAlert } from '@/common/app-reducer'
+import { useAppDispatch, useAppSelector } from '@/store'
 import { SnackbarProvider, useSnackbar } from 'notistack'
 
-type Props = {
-  alert: alert
-}
-function MyApp({ alert }: Props) {
-  // const alertVariant = useAppSelector(state => state.shipments.alert.severity)
+const MyApp = () => {
+  // const alert = { severity: 'info', text: { message: '' } }
+
+  const alert = useAppSelector(state => state.app.alert)
+  //
   const { enqueueSnackbar } = useSnackbar()
-  const [lastAllert, setLastAllert] = useState({ severity: 'info', text: { message: '' } })
+  // const [lastAllert, setLastAllert] = useState({ severity: 'info', text: { message: '' } })
 
   // const handleClickVariant = useCallback(() => {
   //   alertMessage !== '' && enqueueSnackbar(alertMessage, { variant: alertVariant })
   // }, [alertMessage])
 
-  // useEffect(() => {
-  //   // debugger
-  //   // handleClickVariant()
-  //
-  // }, [alert])
-  debugger
-
-  alert.text.message !== '' && enqueueSnackbar(alert.text.message, { variant: alert.severity })
-  setLastAllert(alert)
+  useEffect(() => {
+    // handleClickVariant()
+    alert && enqueueSnackbar(alert.text.message, { variant: alert.severity })
+  }, [alert])
 
   return <></>
 }
 
-export const IntegrationNotistack = ({ alert }: Props) => {
+export const IntegrationNotistack = () => {
+  const dispatch = useAppDispatch()
+  const handleClose = () => {
+    dispatch(resetAlert())
+    debugger
+  }
+
   return (
-    <SnackbarProvider maxSnack={3}>
-      <MyApp alert={alert} />
+    <SnackbarProvider maxSnack={3} onClose={handleClose}>
+      <MyApp />
     </SnackbarProvider>
   )
 }

@@ -52,5 +52,3 @@ export const SortButton = ({ title }: Props) => {
     </button>
   )
 }
-
-export default SortButton

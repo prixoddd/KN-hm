@@ -1,10 +1,9 @@
-import { RootObjectChild, SortDirectionT, alert, sortType } from '@/common/types'
+import { RootObjectChild, SortDirectionT, sortType } from '@/common/types'
 import { ForEdit } from '@/components/editableSpan/editableTextField'
 import { AppRootStateType } from '@/store'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 type ShipmentsState = {
-  alert: alert
   editObj: RootObjectChild
   loader: boolean
   shipments: RootObjectChild[]
@@ -20,7 +19,6 @@ type ShipmentsState = {
 }
 
 const initialState: ShipmentsState = {
-  alert: { severity: 'info', text: { message: '' } },
   editObj: {
     consignee: '',
     customer: '',
@@ -30,6 +28,7 @@ const initialState: ShipmentsState = {
     trackingNo: '',
   },
   loader: false,
+
   shipments: [],
   sortDirection: {
     consignee: '',
@@ -60,9 +59,6 @@ export const shipmentsSlice = createSlice({
     },
     resetShipments: state => {
       state.shipments = []
-    },
-    setAlert: (state, action: PayloadAction<alert>) => {
-      state.alert = { ...action.payload }
     },
     setArrForEdit: (state, action) => {
       state.editObj = { ...action.payload }
@@ -161,7 +157,6 @@ export const {
   deleteShipment,
   editShipments,
   resetShipments,
-  setAlert,
   setArrForEdit,
   setLoader,
   setShipments,
@@ -170,8 +165,6 @@ export const {
 
 export const selectShipments = (state: AppRootStateType) => state.shipments
 export const selectArrFoeEdit = (state: AppRootStateType) => state.shipments.editObj
-export const selectLoader = (state: AppRootStateType) => state.shipments.loader
 export const selectSortDirection = (state: AppRootStateType) => state.shipments.sortDirection
 export const selectorSortBy = (state: AppRootStateType) => state.shipments.sortDirection.sortBy
-
-export default shipmentsSlice.reducer
+export const selectLoader = (state: AppRootStateType) => state.shipments.loader

@@ -2,7 +2,7 @@ import { Provider } from 'react-redux'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 
 import { App } from '@/App'
-import EntrancePage from '@/components/entrancePage/entrancePage'
+import { EntrancePage } from '@/components/entrancePage/entrancePage'
 import { store } from '@/store'
 import { createRoot } from 'react-dom/client'
 
