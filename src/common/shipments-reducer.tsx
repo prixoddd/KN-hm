@@ -5,7 +5,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 type ShipmentsState = {
   editObj: RootObjectChild
-  loader: boolean
+
   shipments: RootObjectChild[]
   sortDirection: {
     consignee: SortDirectionT
@@ -27,7 +27,6 @@ const initialState: ShipmentsState = {
     status: '',
     trackingNo: '',
   },
-  loader: false,
 
   shipments: [],
   sortDirection: {
@@ -63,9 +62,7 @@ export const shipmentsSlice = createSlice({
     setArrForEdit: (state, action) => {
       state.editObj = { ...action.payload }
     },
-    setLoader: (state, action) => {
-      state.loader = action.payload
-    },
+
     setShipments: (state, action) => {
       state.shipments.push(...action.payload)
     },
@@ -158,7 +155,6 @@ export const {
   editShipments,
   resetShipments,
   setArrForEdit,
-  setLoader,
   setShipments,
   sortShipments,
 } = shipmentsSlice.actions
@@ -167,4 +163,3 @@ export const selectShipments = (state: AppRootStateType) => state.shipments
 export const selectArrFoeEdit = (state: AppRootStateType) => state.shipments.editObj
 export const selectSortDirection = (state: AppRootStateType) => state.shipments.sortDirection
 export const selectorSortBy = (state: AppRootStateType) => state.shipments.sortDirection.sortBy
-export const selectLoader = (state: AppRootStateType) => state.shipments.loader

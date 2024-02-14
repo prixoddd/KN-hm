@@ -1,7 +1,8 @@
 import { useEffect } from 'react'
 
 import { fetchData } from '@/common/api'
-import { resetShipments, selectLoader } from '@/common/shipments-reducer'
+import { selectLoader } from '@/common/app-reducer'
+import { resetShipments } from '@/common/shipments-reducer'
 import { IntegrationNotistack } from '@/components/snackbar/snackbar'
 import { BasicTable } from '@/components/table/table'
 import { useAppDispatch, useAppSelector } from '@/store'

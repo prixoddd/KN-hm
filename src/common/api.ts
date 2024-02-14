@@ -1,5 +1,5 @@
-import { setAlert } from '@/common/app-reducer'
-import { setLoader, setShipments } from '@/common/shipments-reducer'
+import { setAlert, setLoader } from '@/common/app-reducer'
+import { setShipments } from '@/common/shipments-reducer'
 import { RootObject } from '@/common/types'
 import { Dispatch } from '@reduxjs/toolkit'
 import axios from 'axios'

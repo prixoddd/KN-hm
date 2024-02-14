@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { AxiosSvg } from '@/assets/icons/axiosSvg'
@@ -7,15 +6,18 @@ import { ReactSvg } from '@/assets/icons/reactSvg'
 import { ReduxSvg } from '@/assets/icons/reduxSvg'
 import { SassSvg } from '@/assets/icons/sassSvg'
 import { TypescriptSvg } from '@/assets/icons/typescriptSvg'
+import { selectToggle, setEntranceToggle } from '@/common/app-reducer'
+import { useAppDispatch, useAppSelector } from '@/store'
 import { Button, Paper, Switch, Typography } from '@mui/material'
 
 import s from './entrancePage.module.scss'
 
 export const EntrancePage = () => {
-  const [checked, setChecked] = useState(false)
+  const checked = useAppSelector(selectToggle)
+  const dispatch = useAppDispatch()
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setChecked(event.target.checked)
+    dispatch(setEntranceToggle(event.target.checked))
   }
 
   const navigate = useNavigate()

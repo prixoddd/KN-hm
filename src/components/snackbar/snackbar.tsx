@@ -5,16 +5,9 @@ import { useAppDispatch, useAppSelector } from '@/store'
 import { SnackbarProvider, useSnackbar } from 'notistack'
 
 const MyApp = () => {
-  // const alert = { severity: 'info', text: { message: '' } }
-
   const alert = useAppSelector(state => state.app.alert)
-  //
-  const { enqueueSnackbar } = useSnackbar()
-  // const [lastAllert, setLastAllert] = useState({ severity: 'info', text: { message: '' } })
 
-  // const handleClickVariant = useCallback(() => {
-  //   alertMessage !== '' && enqueueSnackbar(alertMessage, { variant: alertVariant })
-  // }, [alertMessage])
+  const { enqueueSnackbar } = useSnackbar()
 
   useEffect(() => {
     // handleClickVariant()
@@ -32,7 +25,7 @@ export const IntegrationNotistack = () => {
   }
 
   return (
-    <SnackbarProvider maxSnack={3} onClose={handleClose}>
+    <SnackbarProvider disableWindowBlurListener maxSnack={3} onClose={handleClose}>
       <MyApp />
     </SnackbarProvider>
   )

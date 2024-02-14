@@ -3,7 +3,7 @@ import * as React from 'react'
 import { deleteShipment, selectShipments, setArrForEdit } from '@/common/shipments-reducer'
 import { RootObjectChild } from '@/common/types'
 import { BasicModal } from '@/components/modal/modal'
-import { SortButton } from '@/components/sortButton/sortButton'
+
 import { useAppDispatch, useAppSelector } from '@/store'
 import {
   Button,
@@ -17,6 +17,7 @@ import {
 } from '@mui/material'
 
 import s from './table.module.scss'
+import {SortButton} from '@/components/sortButton/sortButton';
 
 export const BasicTable = () => {
   const dispatch = useAppDispatch()
@@ -39,19 +40,29 @@ export const BasicTable = () => {
               <TableCell align={'left'}>ORDERNO</TableCell>
 
               <TableCell align={'left'}>
-                DELIVERYDATE <SortButton title={'date'} />
+                <div className={s.tableCellDiv}>
+                  DELIVERYDATE <SortButton title={'date'} />
+                </div>
               </TableCell>
               <TableCell align={'left'}>
-                CUSTOMER <SortButton title={'customer'} />
+                <div className={s.tableCellDiv}>
+                  CUSTOMER <SortButton title={'customer'} />
+                </div>
               </TableCell>
               <TableCell align={'left'}>
-                TRANCKINGNO <SortButton title={'trackingNo'} />
+                <div className={s.tableCellDiv}>
+                  TRANCKINGNO <SortButton title={'trackingNo'} />
+                </div>
               </TableCell>
               <TableCell align={'left'}>
-                STATUS <SortButton title={'status'} />
+                <div className={s.tableCellDiv}>
+                  STATUS <SortButton title={'status'} />
+                </div>
               </TableCell>
               <TableCell align={'left'}>
-                CONSIGNEE <SortButton title={'consignee'} />
+                <div className={s.tableCellDiv}>
+                  CONSIGNEE <SortButton title={'consignee'} />
+                </div>
               </TableCell>
               <TableCell align={'left'}></TableCell>
               <TableCell align={'left'}></TableCell>
