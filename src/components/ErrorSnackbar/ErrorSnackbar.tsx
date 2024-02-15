@@ -17,7 +17,6 @@ export function ErrorSnackbar() {
 
   const handleClose = () => {
     dispatch(resetAlert())
-    debugger
   }
 
   const isOpen = alert !== null

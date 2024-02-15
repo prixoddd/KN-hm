@@ -21,7 +21,6 @@ export const IntegrationNotistack = () => {
   const dispatch = useAppDispatch()
   const handleClose = () => {
     dispatch(resetAlert())
-    debugger
   }
 
   return (

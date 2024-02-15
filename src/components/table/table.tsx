@@ -3,7 +3,7 @@ import * as React from 'react'
 import { deleteShipment, selectShipments, setArrForEdit } from '@/common/shipments-reducer'
 import { RootObjectChild } from '@/common/types'
 import { BasicModal } from '@/components/modal/modal'
-
+import { SortButton } from '@/components/sortButton/sortButton'
 import { useAppDispatch, useAppSelector } from '@/store'
 import {
   Button,
@@ -17,7 +17,6 @@ import {
 } from '@mui/material'
 
 import s from './table.module.scss'
-import {SortButton} from '@/components/sortButton/sortButton';
 
 export const BasicTable = () => {
   const dispatch = useAppDispatch()
@@ -37,11 +36,11 @@ export const BasicTable = () => {
         <Table aria-label={'simple table'} sx={{ minWidth: 650 }}>
           <TableHead>
             <TableRow className={s.mainRow}>
-              <TableCell align={'left'}>ORDERNO</TableCell>
+              <TableCell align={'left'}>ORDER NO</TableCell>
 
               <TableCell align={'left'}>
                 <div className={s.tableCellDiv}>
-                  DELIVERYDATE <SortButton title={'date'} />
+                  DELIVERY DATE <SortButton title={'date'} />
                 </div>
               </TableCell>
               <TableCell align={'left'}>
@@ -51,7 +50,7 @@ export const BasicTable = () => {
               </TableCell>
               <TableCell align={'left'}>
                 <div className={s.tableCellDiv}>
-                  TRANCKINGNO <SortButton title={'trackingNo'} />
+                  TRACKING NO <SortButton title={'trackingNo'} />
                 </div>
               </TableCell>
               <TableCell align={'left'}>

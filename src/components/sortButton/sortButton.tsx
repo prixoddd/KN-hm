@@ -1,3 +1,4 @@
+import { selectLoader } from '@/common/app-reducer'
 import { selectSortDirection, selectorSortBy, sortShipments } from '@/common/shipments-reducer'
 import { SortDirectionT, sortType } from '@/common/types'
 import { useAppDispatch, useAppSelector } from '@/store'
@@ -9,6 +10,7 @@ type Props = {
 }
 
 export const SortButton = ({ title }: Props) => {
+  const loader = useAppSelector(selectLoader)
   const dispatch = useAppDispatch()
   const sortDirection = useAppSelector(selectSortDirection)
 
@@ -41,13 +43,13 @@ export const SortButton = ({ title }: Props) => {
   }
 
   return (
-    <button onClick={() => filterHandler(title)}>
+    <button disabled={loader} onClick={() => filterHandler(title)}>
       {sortBy !== title ? (
         <>
           <span className={s.arrowRed}>↑</span> <span className={s.arrowGreen}>↓</span>
         </>
       ) : (
-        renderSortDirection(sortDirection.date)
+        renderSortDirection(sortDirection[title])
       )}
     </button>
   )
