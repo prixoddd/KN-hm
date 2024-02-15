@@ -3,7 +3,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo'
-import * as dayjs from 'dayjs'
+import dayjs from 'dayjs'
 
 import 'dayjs/locale/en'
 
@@ -22,10 +22,12 @@ export function BasicDatePicker({ label, onChange, onClose }: Props) {
     onClose()
   }
 
+  const value = dayjs(label)
+
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer components={['DatePicker']}>
-        <DatePicker onChange={dateHandler} value={dayjs(label)} />
+        <DatePicker onChange={dateHandler} value={value} />
         <Button onClick={onClick} size={'small'} variant={'outlined'}>
           Submit
         </Button>
