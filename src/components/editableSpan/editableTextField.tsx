@@ -16,50 +16,47 @@ type EditableSpanPropsType = {
   value: string
 }
 export type ForEdit = {
-  modifyArray: RootObjectChild
+  name: string
   orderNo: string
+  title: string
 }
 
-export const EditableTextField = React.memo(function (props: EditableSpanPropsType) {
+export const EditableTextField = React.memo(function ({
+  array,
+  name,
+  value,
+}: EditableSpanPropsType) {
   const dispatch = useAppDispatch()
+
   const [editMode, setEditMode] = useState(false)
-  const [title, setTitle] = useState(props.value)
-  const [modifyArray, setModifyArray] = useState(props.array)
+  const [title, setTitle] = useState(value)
 
   const activateEditMode = () => {
-    if (props.name !== 'orderNo' && props.name !== 'trackingNo') {
+    if (name !== 'orderNo' && name !== 'trackingNo') {
       setEditMode(true)
     }
   }
   const activateViewMode = () => {
     setEditMode(false)
-    dispatch(editShipments({ modifyArray: modifyArray, orderNo: props.array.orderNo }))
+    dispatch(editShipments({ name: name, orderNo: array.orderNo, title: title }))
   }
 
   const changeTitle = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.currentTarget.value)
-    setModifyArray(prevState => ({
-      ...prevState,
-      [props.name]: title,
-    }))
   }
 
   const changeDateAndStatusTitle = (date: string) => {
     setTitle(date)
-    setModifyArray(prevState => ({
-      ...prevState,
-      [props.name]: date,
-    }))
   }
 
   return (
     <div>
       <div>
         <div className={s.childDiv}>
-          <Typography variant={'subtitle1'}>{props.name}</Typography>
+          <Typography variant={'subtitle1'}>{name}</Typography>
         </div>
       </div>
-      {editMode && props.name !== 'date' && props.name !== 'status' && (
+      {editMode && name !== 'date' && name !== 'status' && (
         <TextField
           autoFocus
           fullWidth
@@ -68,14 +65,14 @@ export const EditableTextField = React.memo(function (props: EditableSpanPropsTy
           value={title}
         />
       )}
-      {editMode && props.name === 'date' && (
+      {editMode && name === 'date' && (
         <BasicDatePicker
           label={title}
           onChange={changeDateAndStatusTitle}
           onClose={activateViewMode}
         />
       )}
-      {editMode && props.name === 'status' && (
+      {editMode && name === 'status' && (
         <BasicSelect onBlur={activateViewMode} onChange={changeDateAndStatusTitle} value={title} />
       )}
       {!editMode && (
