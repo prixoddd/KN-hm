@@ -1,5 +1,4 @@
 import { selectArrFoeEdit } from '@/common/shipments-reducer'
-import { sortType } from '@/common/types'
 import { EditableTextField } from '@/components/editableSpan/editableTextField'
 import { useAppSelector } from '@/store'
 import { Box, Modal, Typography } from '@mui/material'
@@ -26,21 +25,26 @@ export const BasicModal = (props: PropsType) => {
           <Typography component={'h2'} id={'modal-modal-title'} variant={'h6'}>
             SHIPMENT DETAILS
           </Typography>
-          <Typography sx={{ marginLeft: '50px' }} variant={'subtitle1'}>
-            You can edit each text field by double-clicking on it, except for the orderNo and
-            trackingNo fields.
+          <Typography variant={'subtitle1'}>
+            You can edit each text field by double-clicking on it, <br /> except for the "orderNo"
+            and "trackingNo".
           </Typography>
         </div>
         <div className={s.mainDiv}>
-          {Object.keys(editArr).map((key, index) => (
-            <EditableTextField
-              array={editArr}
-              index={index}
-              key={key}
-              name={key}
-              value={editArr[key as sortType]}
-            />
-          ))}
+          {
+            <>
+              <EditableTextField array={editArr} name={'orderNo'} value={editArr['orderNo']} />
+              <EditableTextField array={editArr} name={'date'} value={editArr['date']} />
+              <EditableTextField array={editArr} name={'customer'} value={editArr['customer']} />
+              <EditableTextField
+                array={editArr}
+                name={'trackingNo'}
+                value={editArr['trackingNo']}
+              />
+              <EditableTextField array={editArr} name={'status'} value={editArr['status']} />
+              <EditableTextField array={editArr} name={'consignee'} value={editArr['consignee']} />
+            </>
+          }
         </div>
       </Box>
     </Modal>

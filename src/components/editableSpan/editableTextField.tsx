@@ -12,7 +12,6 @@ import s from './editableTextField.module.scss'
 
 type EditableSpanPropsType = {
   array: RootObjectChild
-  index: number
   name: string
   value: string
 }
@@ -25,7 +24,6 @@ export const EditableTextField = React.memo(function (props: EditableSpanPropsTy
   const dispatch = useAppDispatch()
   const [editMode, setEditMode] = useState(false)
   const [title, setTitle] = useState(props.value)
-  // const [disabled, setDisabled] = useState(true)
   const [modifyArray, setModifyArray] = useState(props.array)
 
   const activateEditMode = () => {
@@ -56,7 +54,7 @@ export const EditableTextField = React.memo(function (props: EditableSpanPropsTy
 
   return (
     <div>
-      <div key={props.index}>
+      <div>
         <div className={s.childDiv}>
           <Typography variant={'subtitle1'}>{props.name}</Typography>
         </div>

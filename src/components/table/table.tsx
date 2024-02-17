@@ -78,7 +78,11 @@ export const BasicTable = () => {
                   <TableCell align={'left'}>{arr.status}</TableCell>
                   <TableCell align={'left'}>{arr.consignee}</TableCell>
                   <TableCell align={'left'}>
-                    <Button onClick={() => onClickHandler(arr, true)} size={'small'}>
+                    <Button
+                      onClick={() => onClickHandler(arr, true)}
+                      size={'small'}
+                      variant={'contained'}
+                    >
                       Info
                     </Button>
                   </TableCell>
@@ -87,6 +91,7 @@ export const BasicTable = () => {
                       color={'error'}
                       onClick={() => dispatch(deleteShipment(arr.orderNo))}
                       size={'small'}
+                      variant={'contained'}
                     >
                       Delete
                     </Button>
