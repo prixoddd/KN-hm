@@ -54,7 +54,7 @@ export const shipmentsSlice = createSlice({
     editShipments: (state, action: PayloadAction<ForEdit>) => {
       const findArrayIndex = state.shipments.findIndex(e => e.orderNo === action.payload.orderNo)
 
-      state.shipments[findArrayIndex] = action.payload.modifyArray
+      state.shipments[findArrayIndex][action.payload.name as sortType] = action.payload.title
     },
     resetShipments: state => {
       state.shipments = []

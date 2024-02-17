@@ -5,7 +5,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo'
 import dayjs from 'dayjs'
 
-import 'dayjs/locale/en'
+// import 'dayjs/locale/en'
 
 type Props = {
   label: string
@@ -15,19 +15,24 @@ type Props = {
 
 export function BasicDatePicker({ label, onChange, onClose }: Props) {
   const dateHandler = (data: any) => {
-    onChange(data.format('MM/DD/YYYY'))
+    onChange(data.format('M/D/YYYY'))
   }
 
   const onClick = () => {
     onClose()
   }
 
-  const value = dayjs(label)
+  const value = dayjs(dayjs(label).format('M/D/YYYY'))
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer components={['DatePicker']}>
-        <DatePicker onChange={dateHandler} value={value} />
+        <DatePicker
+          format={'M/D/YYYY'}
+          onChange={dateHandler}
+          slotProps={{ field: { shouldRespectLeadingZeros: true } }}
+          value={value}
+        />
         <Button onClick={onClick} size={'small'} variant={'outlined'}>
           Submit
         </Button>
