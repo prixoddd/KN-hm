@@ -81,7 +81,7 @@ export const BasicTable = () => {
                     <Button
                       onClick={() => onClickHandler(arr, true)}
                       size={'small'}
-                      variant={'contained'}
+                      variant={'outlined'}
                     >
                       Info
                     </Button>
@@ -91,7 +91,7 @@ export const BasicTable = () => {
                       color={'error'}
                       onClick={() => dispatch(deleteShipment(arr.orderNo))}
                       size={'small'}
-                      variant={'contained'}
+                      variant={'outlined'}
                     >
                       Delete
                     </Button>

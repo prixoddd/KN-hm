@@ -33,16 +33,16 @@ export const BasicModal = (props: PropsType) => {
         <div className={s.mainDiv}>
           {
             <>
-              <EditableTextField array={editArr} name={'orderNo'} value={editArr['orderNo']} />
-              <EditableTextField array={editArr} name={'date'} value={editArr['date']} />
-              <EditableTextField array={editArr} name={'customer'} value={editArr['customer']} />
+              <EditableTextField array={editArr} name={'Order No'} value={editArr['orderNo']} />
+              <EditableTextField array={editArr} name={'Delivery Date'} value={editArr['date']} />
+              <EditableTextField array={editArr} name={'Customer'} value={editArr['customer']} />
               <EditableTextField
                 array={editArr}
-                name={'trackingNo'}
+                name={'Tracking No'}
                 value={editArr['trackingNo']}
               />
-              <EditableTextField array={editArr} name={'status'} value={editArr['status']} />
-              <EditableTextField array={editArr} name={'consignee'} value={editArr['consignee']} />
+              <EditableTextField array={editArr} name={'Status'} value={editArr['status']} />
+              <EditableTextField array={editArr} name={'Consignee'} value={editArr['consignee']} />
             </>
           }
         </div>

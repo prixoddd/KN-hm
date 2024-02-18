@@ -66,7 +66,7 @@ export const shipmentsSlice = createSlice({
     setShipments: (state, action) => {
       state.shipments.push(...action.payload)
     },
-    sortShipments: (state, action: PayloadAction<sortType>) => {
+    sortShipments: (state, action: PayloadAction<'' | sortType>) => {
       switch (action.payload) {
         case 'consignee':
           state.sortDirection.sortBy = action.payload
@@ -144,7 +144,7 @@ export const shipmentsSlice = createSlice({
           }
           break
         default:
-          break
+          state.sortDirection.sortBy = ''
       }
     },
   },
