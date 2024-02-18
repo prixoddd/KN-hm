@@ -33,16 +33,42 @@ export const BasicModal = (props: PropsType) => {
         <div className={s.mainDiv}>
           {
             <>
-              <EditableTextField array={editArr} name={'Order No'} value={editArr['orderNo']} />
-              <EditableTextField array={editArr} name={'Delivery Date'} value={editArr['date']} />
-              <EditableTextField array={editArr} name={'Customer'} value={editArr['customer']} />
               <EditableTextField
                 array={editArr}
-                name={'Tracking No'}
+                heading={'Order No'}
+                name={'orderNo'}
+                value={editArr['orderNo']}
+              />
+              <EditableTextField
+                array={editArr}
+                heading={'Delivery Date'}
+                name={'date'}
+                value={editArr['date']}
+              />
+              <EditableTextField
+                array={editArr}
+                heading={'Customer'}
+                name={'customer'}
+                value={editArr['customer']}
+              />
+              <EditableTextField
+                array={editArr}
+                heading={'Tracking No'}
+                name={'trackingNo'}
                 value={editArr['trackingNo']}
               />
-              <EditableTextField array={editArr} name={'Status'} value={editArr['status']} />
-              <EditableTextField array={editArr} name={'Consignee'} value={editArr['consignee']} />
+              <EditableTextField
+                array={editArr}
+                heading={'Status'}
+                name={'status'}
+                value={editArr['status']}
+              />
+              <EditableTextField
+                array={editArr}
+                heading={'Consignee'}
+                name={'consignee'}
+                value={editArr['consignee']}
+              />
             </>
           }
         </div>
