@@ -26,8 +26,8 @@ export const BasicModal = (props: PropsType) => {
             SHIPMENT DETAILS
           </Typography>
           <Typography variant={'subtitle1'}>
-            You can edit each text field by double-clicking on it, <br /> except for the "orderNo"
-            and "trackingNo".
+            You can edit each text field by double-clicking on it, <br /> except for the "Order No"
+            and "Tracking No".
           </Typography>
         </div>
         <div className={s.mainDiv}>

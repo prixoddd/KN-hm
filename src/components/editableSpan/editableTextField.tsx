@@ -32,7 +32,8 @@ export const EditableTextField = React.memo(function ({
   const [title, setTitle] = useState(value)
 
   const activateEditMode = () => {
-    if (name !== 'orderNo' && name !== 'trackingNo') {
+    console.log(name)
+    if (name !== 'Order No' && name !== 'Tracking No') {
       setEditMode(true)
     }
   }
@@ -56,7 +57,7 @@ export const EditableTextField = React.memo(function ({
           <Typography variant={'subtitle1'}>{name}</Typography>
         </div>
       </div>
-      {editMode && name !== 'date' && name !== 'status' && (
+      {editMode && name !== 'Delivery Date' && name !== 'Status' && (
         <TextField
           autoFocus
           fullWidth
@@ -65,14 +66,14 @@ export const EditableTextField = React.memo(function ({
           value={title}
         />
       )}
-      {editMode && name === 'date' && (
+      {editMode && name === 'Delivery Date' && (
         <BasicDatePicker
           label={title}
           onChange={changeDateAndStatusTitle}
           onClose={activateViewMode}
         />
       )}
-      {editMode && name === 'status' && (
+      {editMode && name === 'Status' && (
         <BasicSelect onBlur={activateViewMode} onChange={changeDateAndStatusTitle} value={title} />
       )}
       {!editMode && (
