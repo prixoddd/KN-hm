@@ -1,17 +1,18 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { useState } from 'react'
 
 import { editShipments } from '@/common/shipments-reducer'
 import { RootObjectChild } from '@/common/types'
 import { BasicDatePicker } from '@/components/datePicker/datePicker'
 import { BasicSelect } from '@/components/select/select'
+import TextfieldValidation from '@/components/textfieldValidation/textfieldValidation'
 import { useAppDispatch } from '@/store'
-import { Typography } from '@mui/material'
-import TextField from '@mui/material/TextField'
+import { Button, Typography } from '@mui/material'
 
 import s from './editableTextField.module.scss'
 
 type EditableSpanPropsType = {
   array: RootObjectChild
+  heading: string
   name: string
   value: string
 }
@@ -23,6 +24,7 @@ export type ForEdit = {
 
 export const EditableTextField = React.memo(function ({
   array,
+  heading,
   name,
   value,
 }: EditableSpanPropsType) {
@@ -32,8 +34,7 @@ export const EditableTextField = React.memo(function ({
   const [title, setTitle] = useState(value)
 
   const activateEditMode = () => {
-    console.log(name)
-    if (name !== 'Order No' && name !== 'Tracking No') {
+    if (name !== 'orderNo' && name !== 'trackingNo') {
       setEditMode(true)
     }
   }
@@ -42,8 +43,10 @@ export const EditableTextField = React.memo(function ({
     dispatch(editShipments({ name: name, orderNo: array.orderNo, title: title }))
   }
 
-  const changeTitle = (e: ChangeEvent<HTMLInputElement>) => {
-    setTitle(e.currentTarget.value)
+  const activateViewMode2 = (data: string) => {
+    setTitle(data)
+    setEditMode(false)
+    dispatch(editShipments({ name: name, orderNo: array.orderNo, title: data }))
   }
 
   const changeDateAndStatusTitle = (date: string) => {
@@ -54,27 +57,32 @@ export const EditableTextField = React.memo(function ({
     <div>
       <div>
         <div className={s.childDiv}>
-          <Typography variant={'subtitle1'}>{name}</Typography>
+          <Typography sx={{ marginBottom: '5px' }} variant={'subtitle1'}>
+            {heading}
+          </Typography>
         </div>
       </div>
-      {editMode && name !== 'Delivery Date' && name !== 'Status' && (
-        <TextField
-          autoFocus
-          fullWidth
-          onBlur={activateViewMode}
-          onChange={changeTitle}
-          value={title}
-        />
+      {editMode && name !== 'date' && name !== 'status' && (
+        <TextfieldValidation activateViewMode={activateViewMode2} title={title} />
       )}
-      {editMode && name === 'Delivery Date' && (
+      {editMode && name === 'date' && (
         <BasicDatePicker
           label={title}
           onChange={changeDateAndStatusTitle}
           onClose={activateViewMode}
         />
       )}
-      {editMode && name === 'Status' && (
-        <BasicSelect onBlur={activateViewMode} onChange={changeDateAndStatusTitle} value={title} />
+      {editMode && name === 'status' && (
+        <div className={s.childDiv}>
+          <BasicSelect
+            onBlur={activateViewMode}
+            onChange={changeDateAndStatusTitle}
+            value={title}
+          />
+          <Button sx={{ marginLeft: '16px' }} type={'submit'}>
+            Submit
+          </Button>
+        </div>
       )}
       {!editMode && (
         <span className={s.span} onDoubleClick={activateEditMode}>
