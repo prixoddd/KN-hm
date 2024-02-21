@@ -101,8 +101,9 @@ export const NewShipmentModal = ({ onClose, open }: Props) => {
           </Typography>
           <Typography variant={'subtitle1'}>
             {/* eslint-disable-next-line react/no-unescaped-entities */}
-            Please fill every text field with data, except for the "Order No" and "Tracking No"{' '}
-            <br /> as they are generated automatically.
+            Please fill every text field with data, except for the "Order No" <br /> and "Tracking
+            {/* eslint-disable-next-line react/no-unescaped-entities */}
+            No" as they are generated automatically.
           </Typography>
         </div>
         <div className={s.mainDiv}>

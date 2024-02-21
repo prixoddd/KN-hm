@@ -5,7 +5,7 @@ import { Button } from '@mui/material'
 import TextField from '@mui/material/TextField'
 import { z } from 'zod'
 
-import s from './textfieldValidation.module.scss'
+import s from './textFieldValidation.module.scss'
 
 type FormValues = {
   data: string
@@ -20,7 +20,7 @@ const loginSchema = z.object({
   data: z.string().min(3).max(50),
 })
 
-const TextfieldValidation = ({ activateViewMode, title }: Props) => {
+const TextFieldValidation = ({ activateViewMode, title }: Props) => {
   const {
     formState: { errors },
     handleSubmit,
@@ -29,7 +29,6 @@ const TextfieldValidation = ({ activateViewMode, title }: Props) => {
     resolver: zodResolver(loginSchema),
   })
   const onSubmit = (data: FormValues) => {
-    console.log(data)
     activateViewMode(data.data)
   }
 
@@ -54,4 +53,4 @@ const TextfieldValidation = ({ activateViewMode, title }: Props) => {
   )
 }
 
-export default TextfieldValidation
+export default TextFieldValidation
