@@ -39,7 +39,7 @@ export const BasicTable = () => {
       <div className={s.addButton}></div>
 
       <TableContainer component={Paper}>
-        <Table aria-label={'simple table'} sx={{ minWidth: '1760px' }}>
+        <Table aria-label={'simple table'}>
           <TableHead>
             <TableRow className={s.mainRow}>
               <TableCell align={'left'}>ORDER NO</TableCell>
