@@ -76,9 +76,6 @@ export const NewShipmentModal = ({ onClose, open }: Props) => {
     resolver: zodResolver(loginSchema),
   })
   const onSubmit = (data: FormValues) => {
-    // console.log(typeof v1())
-    console.log(data)
-    // activateViewMode(data.data)
     dispatch(addShipment(data))
     reset()
     onClose()
@@ -111,30 +108,40 @@ export const NewShipmentModal = ({ onClose, open }: Props) => {
         <div className={s.mainDiv}>
           <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
             <Typography sx={{ marginBottom: '5px' }} variant={'subtitle1'}>
-              Consignee
-            </Typography>
-            <TextField
-              autoFocus
-              fullWidth
-              {...register('consignee')}
-              error={errors.customer?.message !== undefined}
-              label={errors.customer?.message}
-            />
-            <Typography sx={{ marginBottom: '5px' }} variant={'subtitle1'}>
               Customer
             </Typography>
-            <TextField
-              autoFocus
-              fullWidth
+            <Controller
+              control={control}
               {...register('customer')}
-              error={errors.customer?.message !== undefined}
-              label={errors.customer?.message}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  autoFocus
+                  error={errors.customer?.message !== undefined}
+                  fullWidth
+                  label={errors.customer?.message}
+                />
+              )}
+            />
+            <Typography sx={{ marginBottom: '5px' }} variant={'subtitle1'}>
+              Consignee
+            </Typography>
+            <Controller
+              control={control}
+              {...register('consignee')}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  error={errors.consignee?.message !== undefined}
+                  fullWidth
+                  label={errors.consignee?.message}
+                />
+              )}
             />
             <Typography sx={{ marginBottom: '5px' }} variant={'subtitle1'}>
               Order No
             </Typography>
             <TextField
-              autoFocus
               disabled
               fullWidth
               {...register('orderNo')}
@@ -145,7 +152,6 @@ export const NewShipmentModal = ({ onClose, open }: Props) => {
               Tracking No
             </Typography>
             <TextField
-              autoFocus
               disabled
               fullWidth
               {...register('trackingNo')}
