@@ -4,7 +4,7 @@ import { editShipments } from '@/common/shipments-reducer'
 import { RootObjectChild } from '@/common/types'
 import { BasicDatePicker } from '@/components/datePicker/datePicker'
 import { BasicSelect } from '@/components/select/select'
-import TextfieldValidation from '@/components/textfieldValidation/textfieldValidation'
+import TextFieldValidation from '@/components/textFieldValidation/textFieldValidation'
 import { useAppDispatch } from '@/store'
 import { Button, Typography } from '@mui/material'
 
@@ -63,7 +63,7 @@ export const EditableTextField = React.memo(function ({
         </div>
       </div>
       {editMode && name !== 'date' && name !== 'status' && (
-        <TextfieldValidation activateViewMode={activateViewMode2} title={title} />
+        <TextFieldValidation activateViewMode={activateViewMode2} title={title} />
       )}
       {editMode && name === 'date' && (
         <BasicDatePicker
