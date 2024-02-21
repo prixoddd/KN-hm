@@ -11,5 +11,5 @@ export type RootObjectChild = {
   trackingNo: string
 }
 
-export type sortType = 'consignee' | 'customer' | 'date' | 'orderNo' | 'status' | 'trackingNo'
+export type SortType = 'consignee' | 'customer' | 'date' | 'orderNo' | 'status' | 'trackingNo'
 export type AlertType = 'error' | 'info' | 'success' | 'warning'

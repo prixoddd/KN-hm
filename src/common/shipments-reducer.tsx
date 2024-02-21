@@ -1,5 +1,6 @@
-import { RootObjectChild, SortDirectionT, sortType } from '@/common/types'
+import { RootObjectChild, SortDirectionT, SortType } from '@/common/types'
 import { ForEdit } from '@/components/editableSpan/editableTextField'
+import { FormValues } from '@/components/newShipmentModal/newShipmentModal'
 import { AppRootStateType } from '@/store'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
@@ -12,7 +13,7 @@ type ShipmentsState = {
     customer: SortDirectionT
     date: SortDirectionT
     orderNo: SortDirectionT
-    sortBy: '' | sortType
+    sortBy: '' | SortType
     status: SortDirectionT
     trackingNo: SortDirectionT
   }
@@ -44,6 +45,11 @@ export const shipmentsSlice = createSlice({
   initialState,
   name: 'shipments',
   reducers: {
+    addShipment: (state, action: PayloadAction<FormValues>) => {
+      const newObj = { ...action.payload, date: action.payload.date.format('M/D/YYYY') }
+
+      state.shipments.unshift(newObj)
+    },
     deleteShipment: (state, action) => {
       const index = state.shipments.findIndex(todo => todo.orderNo === action.payload)
 
@@ -54,7 +60,7 @@ export const shipmentsSlice = createSlice({
     editShipments: (state, action: PayloadAction<ForEdit>) => {
       const findArrayIndex = state.shipments.findIndex(e => e.orderNo === action.payload.orderNo)
 
-      state.shipments[findArrayIndex][action.payload.name as sortType] = action.payload.title
+      state.shipments[findArrayIndex][action.payload.name as SortType] = action.payload.title
     },
     resetShipments: state => {
       state.shipments = []
@@ -66,7 +72,7 @@ export const shipmentsSlice = createSlice({
     setShipments: (state, action) => {
       state.shipments.push(...action.payload)
     },
-    sortShipments: (state, action: PayloadAction<'' | sortType>) => {
+    sortShipments: (state, action: PayloadAction<'' | SortType>) => {
       switch (action.payload) {
         case 'consignee':
           state.sortDirection.sortBy = action.payload
@@ -151,6 +157,7 @@ export const shipmentsSlice = createSlice({
 })
 
 export const {
+  addShipment,
   deleteShipment,
   editShipments,
   resetShipments,

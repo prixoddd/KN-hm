@@ -1,8 +1,10 @@
 import * as React from 'react'
+import { useState } from 'react'
 
 import { deleteShipment, selectShipments, setArrForEdit } from '@/common/shipments-reducer'
 import { RootObjectChild } from '@/common/types'
 import { BasicModal } from '@/components/modal/modal'
+import { NewShipmentModal } from '@/components/newShipmentModal/newShipmentModal'
 import { SortButton } from '@/components/sortButton/sortButton'
 import { useAppDispatch, useAppSelector } from '@/store'
 import {
@@ -21,6 +23,7 @@ import s from './table.module.scss'
 export const BasicTable = () => {
   const dispatch = useAppDispatch()
   const [open, setOpen] = React.useState(false)
+  const [newOpen, setNewOpen] = useState(false)
 
   const shipments = useAppSelector(selectShipments)
 
@@ -31,9 +34,12 @@ export const BasicTable = () => {
 
   return (
     <>
+      <NewShipmentModal onClose={() => setNewOpen(false)} open={newOpen} />
       <BasicModal onClose={() => setOpen(false)} open={open} />
+      <div className={s.addButton}></div>
+
       <TableContainer component={Paper}>
-        <Table aria-label={'simple table'} sx={{ minWidth: 650 }}>
+        <Table aria-label={'simple table'} sx={{ minWidth: '1760px' }}>
           <TableHead>
             <TableRow className={s.mainRow}>
               <TableCell align={'left'}>ORDER NO</TableCell>
@@ -64,7 +70,16 @@ export const BasicTable = () => {
                 </div>
               </TableCell>
               <TableCell align={'left'}></TableCell>
-              <TableCell align={'left'}></TableCell>
+              <TableCell align={'left'}>
+                <Button
+                  onClick={() => setNewOpen(true)}
+                  size={'small'}
+                  sx={{ position: 'absolute', right: '22px', top: '12px' }}
+                  variant={'contained'}
+                >
+                  Add New Shipment
+                </Button>
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

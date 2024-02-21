@@ -1,4 +1,5 @@
 .mainRow {
+  position: relative;
   background-color: rgb(172 210 230 / 65%);
 }
 
@@ -12,4 +13,17 @@
 
 .tableCellDiv {
   width: max-content;
+}
+
+.addButton {
+  position: fixed;
+  bottom: 10px;
+  left: calc(50% - 50px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 150px;
+  height: 75px;
 }

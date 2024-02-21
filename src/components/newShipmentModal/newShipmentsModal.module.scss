@@ -1,0 +1,40 @@
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 80vw;
+  max-width: 880px;
+  padding: 16px;
+
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 24px rgb(0 0 0 / 50%);
+}
+
+.mainDiv {
+  display: flex;
+  justify-content: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  max-width: 600px;
+  margin-top: 20px;
+}
+
+.title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+
+  text-align: center;
+
+  background-color: rgb(178 210 224 / 45%);
+  border-radius: 5px;
+}

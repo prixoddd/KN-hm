@@ -1,12 +1,12 @@
 import { selectLoader } from '@/common/app-reducer'
 import { selectSortDirection, selectorSortBy, sortShipments } from '@/common/shipments-reducer'
-import { SortDirectionT, sortType } from '@/common/types'
+import { SortDirectionT, SortType } from '@/common/types'
 import { useAppDispatch, useAppSelector } from '@/store'
 
 import s from '@/components/table/table.module.scss'
 
 type Props = {
-  title: sortType
+  title: SortType
 }
 
 export const SortButton = ({ title }: Props) => {
@@ -15,7 +15,7 @@ export const SortButton = ({ title }: Props) => {
   const sortDirection = useAppSelector(selectSortDirection)
 
   const sortBy = useAppSelector(selectorSortBy)
-  const filterHandler = (sortBy: sortType) => {
+  const filterHandler = (sortBy: SortType) => {
     dispatch(sortShipments(sortBy))
   }
 
